@@ -1,0 +1,21 @@
+{
+    "name": "lemelinha/buffet-fest",
+    "description": "Sistema de gerenciamento de Buffets, com o cliente tendo a possibilidade de pedir comida e bebida pelo QRcode em sua mesa",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "Needs\\": "vendor/Needs/",
+            "Dotenv\\": "vendor/vlucas/phpdotenv/src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lucas Leme",
+            "email": "l.leme3008@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
