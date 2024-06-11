@@ -5,7 +5,6 @@ use \PDO;
 
 /**
  *  Classe de conexão com banco de dados
- * 
  */
 abstract class Connection {
     /**

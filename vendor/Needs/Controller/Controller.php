@@ -3,6 +3,18 @@
 namespace Needs\Controller;
 
 abstract class Controller {
+    protected function render($view, $layout, $viewDirectory='', $layoutDirectory='') {
+        $this->page = new \stdClass();
+        $this->page->view = $view;
+        $this->page->viewDirectory = $viewDirectory;
+
+        if (file_exists('../App/Layouts/' . $layoutDirectory . '/' . $layout . '.php')){
+            require '../App/Layouts/' . $layoutDirectory . '/' . $layout . '.php';
+        } else {
+            echo "Layout $layout inexistente";
+        }
+    }
+
     protected function renderLayout($layout, $directory=''){        
         if (file_exists('../App/Layouts/' . $directory . '/' . $layout . '.php')){
             require '../App/Layouts/' . $directory . '/' . $layout . '.php';
