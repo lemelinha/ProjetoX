@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$background-main: #333;
+$main-color: #5424da;
+
+$logo-font: 'MicroSquareRegular';
+$logo-font-bold: 'MicroSquareBold';
+
+@font-face {
+    font-family: 'MicroSquareRegular';
+    src: url('../fonts/MicroSquare\ Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'MicroSquareBold';
+    src: url('../fonts/MicroSquare\ Bold.ttf') format('truetype');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    height: 100svh;
+    background-color: #f5f5f5;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+body#layout header {
+    background-color: $background-main;
+    padding: 10px;
+    height: 90px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font-family: 'Montserrat';
+    color: #fff;
+
+    h1 {
+        font-family: $logo-font-bold;
+        font-size: 42px;
+    }
+
+    a {
+        font-family: $logo-font;
+    }
+
+    .btn {
+        font-size: 18px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: inline-block;
+        text-align: center;
+        font-weight: bold;
+        padding: 0.7em 2em;
+        border: 3px solid $main-color;
+        border-radius: 2px;
+        position: relative;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+        color: #ffffff;
+        text-decoration: none;
+        transition: 0.3s ease all;
+        z-index: 1;
+        margin: 5px;
+
+        &:before {
+            transition: 0.5s all ease;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            right: 50%;
+            bottom: 0;
+            opacity: 0;
+            content: '';
+            background-color: $main-color;
+            z-index: -1;
+        }
+
+        &:hover, &:focus {
+            color: #fff;
+
+            &:before {
+                transition: 0.5s all ease;
+                left: 0;
+                right: 0;
+                opacity: 1;
+            }
+        }
+
+        &:active {
+            transform: scale(0.9);
+        }
+    }    
+}
+
+body#login,
+body#register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #161616;
+    padding: 10px;
+
+    form {
+        max-width: 450px;
+        width: 450px;
+        padding: 60px 25px;
+
+        box-shadow: 0px 15px 60px #5424da;
+        outline: 1px solid #2b9962;
+        border-radius: 10px;
+        
+        color: #f5f5f5;
+
+        font-family: 'Poppins';
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 30px;
+
+        h1 {
+            font-family: $logo-font;
+            color: $main-color;
+            font-size: 42px;
+        }
+
+        input {
+            padding: 10px 15px;
+            border-radius: 4px;
+
+            background-color: #d4d4d4;
+            width: 200px;
+
+            transition: 200ms;
+            &:hover,
+            &:focus {
+                background-color: #acacac;
+            }
+        }
+
+        input[type='submit'] {
+            cursor: pointer;
+            color: $main-color;
+            background-color: transparent;
+
+            font-weight: bold;
+            font-size: 14px;
+            padding: 14px 13px;
+            border: 1px solid $main-color;
+            border-radius: 8px;
+
+            transition: all ease-in-out .3s;
+
+            &:hover {
+                background-color: $main-color;
+                color: #161616;
+            }
+        }
+
+        a#register {
+            position: relative;
+            color: $main-color;
+            font-weight: bolder;
+
+            display: inline-flex;
+
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                position: absolute;
+                background-color: $main-color;
+                
+                height: 2px;
+                width: 100%;
+                
+                top: 100%;
+                left: 0;
+                z-index: 1;
+                transform: translate(-110%, -100%);
+                transition: 200ms ease-in-out;
+            }
+
+            &:hover::before {
+                transform: translate(0, -100%);
+            }
+        }
+    }
+}

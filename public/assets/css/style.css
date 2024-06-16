@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@font-face {
+  font-family: "MicroSquareRegular";
+  src: url("../fonts/MicroSquare Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "MicroSquareBold";
+  src: url("../fonts/MicroSquare Bold.ttf") format("truetype");
+}
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  height: 100svh;
+  background-color: #f5f5f5;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+body#layout header {
+  background-color: #333;
+  padding: 10px;
+  height: 90px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Montserrat";
+  color: #fff;
+}
+body#layout header h1 {
+  font-family: "MicroSquareBold";
+  font-size: 42px;
+}
+body#layout header a {
+  font-family: "MicroSquareRegular";
+}
+body#layout header .btn {
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 0.7em 2em;
+  border: 3px solid #5424da;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.3s ease all;
+  z-index: 1;
+  margin: 5px;
+}
+body#layout header .btn:before {
+  transition: 0.5s all ease;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  opacity: 0;
+  content: "";
+  background-color: #5424da;
+  z-index: -1;
+}
+body#layout header .btn:hover, body#layout header .btn:focus {
+  color: #fff;
+}
+body#layout header .btn:hover:before, body#layout header .btn:focus:before {
+  transition: 0.5s all ease;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+body#layout header .btn:active {
+  transform: scale(0.9);
+}
+
+body#login,
+body#register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #161616;
+  padding: 10px;
+}
+body#login form,
+body#register form {
+  max-width: 450px;
+  width: 450px;
+  padding: 60px 25px;
+  box-shadow: 0px 15px 60px #5424da;
+  outline: 1px solid #2b9962;
+  border-radius: 10px;
+  color: #f5f5f5;
+  font-family: "Poppins";
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+}
+body#login form h1,
+body#register form h1 {
+  font-family: "MicroSquareRegular";
+  color: #5424da;
+  font-size: 42px;
+}
+body#login form input,
+body#register form input {
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #d4d4d4;
+  width: 200px;
+  transition: 200ms;
+}
+body#login form input:hover, body#login form input:focus,
+body#register form input:hover,
+body#register form input:focus {
+  background-color: #acacac;
+}
+body#login form input[type=submit],
+body#register form input[type=submit] {
+  cursor: pointer;
+  color: #5424da;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 14px 13px;
+  border: 1px solid #5424da;
+  border-radius: 8px;
+  transition: all ease-in-out 0.3s;
+}
+body#login form input[type=submit]:hover,
+body#register form input[type=submit]:hover {
+  background-color: #5424da;
+  color: #161616;
+}
+body#login form a#register,
+body#register form a#register {
+  position: relative;
+  color: #5424da;
+  font-weight: bolder;
+  display: inline-flex;
+  overflow: hidden;
+}
+body#login form a#register::before,
+body#register form a#register::before {
+  content: "";
+  position: absolute;
+  background-color: #5424da;
+  height: 2px;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  transform: translate(-110%, -100%);
+  transition: 200ms ease-in-out;
+}
+body#login form a#register:hover::before,
+body#register form a#register:hover::before {
+  transform: translate(0, -100%);
+}
+
+/*# sourceMappingURL=style.css.map */

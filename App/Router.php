@@ -21,6 +21,36 @@ abstract class Router {
             'controller' => 'IndexController',
             'action' => 'index'
         ];
+
+        $routes['login'] = [
+            'router' => '/login',
+            'controller' => 'LoginController',
+            'action' => 'index'
+        ];
+
+        $routes['loginAuth'] = [
+            'router' => '/login/auth',
+            'controller' => 'LoginController',
+            'action' => 'authLogin'
+        ];
+
+        $routes['registerForm'] = [
+            'router' => '/register',
+            'controller' => 'RegisterController',
+            'action' => 'index'
+        ];
+
+        $routes['register'] = [
+            'router' => '/register/register',
+            'controller' => 'RegisterController',
+            'action' => 'register'
+        ];
+
+        $routes['logout'] = [
+            'router' => '/logout',
+            'controller' => 'LoginController',
+            'action' => 'logout'
+        ];
         
         $this->routes = $routes;
     }

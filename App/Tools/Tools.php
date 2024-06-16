@@ -8,30 +8,31 @@ abstract class Tools {
      *  Verifica se um usuário já existe
      * 
      *  Acessa o banco de dados para 
-     *  verificar se um nome de usuário já 
+     *  verificar se um nome de usuário ou email já 
      *  está em uso
      * 
      *  @param string $usuario 
+     *  @param string $email 
      * 
      *  @return bool
      */
-    static public function usernameExists($username){
-        $sql = "
-            SELECT 
-                nm_usuario
+    static public function usernameOrEmailExists($username, $email){
+        $sql = "SELECT 
+                *
             FROM
                 tb_usuario
             WHERE 
-                nm_usuario = :usuario
+                (nm_usuario = :usuario OR nm_email = :email)
         ";
         $query = Connection::connect()->prepare($sql);
         $query->bindParam(':usuario', $username);
+        $query->bindParam(':email', $email);
         $query->execute();
 
-        if (empty($query->fetchAll())){
-            return false;
+        if ($query->rowCount() != 0){
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
