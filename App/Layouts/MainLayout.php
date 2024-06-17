@@ -12,7 +12,7 @@
 </head>
 <body id='mainLayout'>
     <header>
-        <h1>Study IQ</h1>
+        <h1><a href="/">Study IQ</a></h1>
         <?php
             if (isset($_SESSION['logged']) && !empty($_SESSION['logged'])){ ?> 
                 <div style='display: flex; align-items: center; column-gap: 10px; flex-wrap: wrap'>
@@ -27,33 +27,6 @@
                 <a class="btn" href="/login">Login</a>
         <?php } ?>
     </header>
-    <main>
-        <h1>Banco de perguntas</h1>
-        <a class='btn' id='add-pergunta' href="/add/pergunta"><i class="fa-solid fa-plus"></i>Adicionar Pergunta</a>
-        <section>
-            <form id="perguntas-filtro">
-                <select name="materia">
-                    <option value="" selected>Todas</option>
-                    <option value="1">materia 1</option>
-                    <option value="2">materia 2</option>
-                </select>
-                <select name="materia">
-                    <option value="" selected>Todas</option>
-                    <optgroup label='materia 1'>
-                        <option value="1">submateria 1</option>
-                        <option value="2">submateria 2</option>
-                    </optgroup>
-                    <optgroup label='materia 2'>
-                        <option value="1">submateria 1</option>
-                        <option value="2">submateria 2</option>
-                    </optgroup>
-                </select>
-            </form>
-            <section>
-                
-            </section>
-        </section>
-    </main>
-    <!--<?php $this->renderView($this->page->view, $this->page->viewDirectory); ?>-->
+    <?php $this->renderView($this->page->view, $this->page->viewDirectory); ?>
 </body>
 </html>

@@ -46,7 +46,7 @@ class Materias extends Model {
         return $query->fetchAll();
     }
 
-    public function returnSubMaterias() {
+    public function returnSubMaterias($materiaPai='') {
         $sql = "SELECT
                     cd_submateria,
                     nm_submateria,
@@ -59,7 +59,14 @@ class Materias extends Model {
                         id_materia = cd_materia
         ";
 
+        if ($materiaPai != '') {
+            $sql .= "WHERE
+                        cd_materia = :materiaPai";
+        }
         $query = $this->db->prepare($sql);
+        if ($materiaPai != '') {
+            $query->bindParam(':materiaPai', $materiaPai);
+        }
         $query->execute();
 
         return $query->fetchAll();

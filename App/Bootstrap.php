@@ -23,6 +23,23 @@ class Bootstrap extends Router{
                 $controllerInstance->$action();
                 die();
             }
+            
+            $regex = str_replace("/", "\/", ltrim($router['router'], "/"));
+            if (preg_match("/^$regex$/", ltrim($uri, "/"))) {
+                $controllerClass = 'App\\Controllers\\' . $router['controller'];
+                $action = $router['action'];
+                
+                $uri = explode('/', ltrim($uri, '/'));
+                $data = array_diff($uri, explode('/', ltrim($router['router'], '/')));
+                $newData = [];
+                foreach ($data as $i => $d){
+                    $newData[$uri[$i - 1]] = $d;
+                }
+
+                $controllerInstance = new $controllerClass();
+                $controllerInstance->$action($newData);
+                die();
+            }
         }
 
         require 'Views/erro.php';

@@ -58,7 +58,50 @@ body#mainLayout main h1 {
 }
 body#mainLayout main .btn#add-pergunta {
   color: #161616;
-  margin-left: 100%;
+  float: right;
+}
+body#mainLayout main form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+body#mainLayout main form select {
+  padding: 10px;
+  font-size: 18px;
+}
+body#mainLayout main form input,
+body#mainLayout main form textarea {
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #d4d4d4;
+  transition: 200ms;
+}
+body#mainLayout main form input:hover, body#mainLayout main form input:focus,
+body#mainLayout main form textarea:hover,
+body#mainLayout main form textarea:focus {
+  background-color: #acacac;
+}
+body#mainLayout main form textarea {
+  transition: none;
+}
+body#mainLayout main form input[type=submit] {
+  cursor: pointer;
+  color: #5424da;
+  background-color: transparent;
+  width: 200px;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 14px 13px;
+  border: 1px solid #5424da;
+  border-radius: 8px;
+  transition: all ease-in-out 0.3s;
+}
+body#mainLayout main form input[type=submit]:hover {
+  background-color: #5424da;
+  color: #161616;
 }
 body#mainLayout .btn {
   font-size: 18px;

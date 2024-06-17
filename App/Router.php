@@ -24,13 +24,13 @@ abstract class Router {
 
         $routes['login'] = [
             'router' => '/login',
-            'controller' => 'LoginController',
+            'controller' => 'UserController',
             'action' => 'index'
         ];
 
         $routes['loginAuth'] = [
             'router' => '/login/auth',
-            'controller' => 'LoginController',
+            'controller' => 'UserController',
             'action' => 'authLogin'
         ];
 
@@ -48,7 +48,7 @@ abstract class Router {
 
         $routes['logout'] = [
             'router' => '/logout',
-            'controller' => 'LoginController',
+            'controller' => 'UserController',
             'action' => 'logout'
         ];
 
@@ -86,6 +86,24 @@ abstract class Router {
             'router' => '/admin/submaterias/add',
             'controller' => 'AdminController',
             'action' => 'addSubMateria'
+        ];
+
+        $routes['addPerguntaForm'] = [
+            'router' => '/pergunta/form',
+            'controller' => 'UserController',
+            'action' => 'formAddPergunta'
+        ];
+
+        $routes['addPergunta'] = [
+            'router' => '/pergunta/add',
+            'controller' => 'PerguntaController',
+            'action' => 'addPergunta'
+        ];
+
+        $routes['getSubMaterias'] = [
+            'router' => '/get/submaterias/materia/[0-9]+',
+            'controller' => 'PerguntaController',
+            'action' => 'returnSubmaterias'
         ];
         
         $this->routes = $routes;

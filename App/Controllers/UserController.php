@@ -3,8 +3,9 @@
 namespace App\Controllers;
 use Needs\Controller\Controller;
 use App\Models\Login;
+use App\Models\Materias;
 
-class LoginController extends Controller {
+class UserController extends Controller {
     public function index() {
         $this->pageTitle = 'Login';
         $this->renderView('login');
@@ -40,5 +41,15 @@ class LoginController extends Controller {
         }
         session_destroy();
         header("Location: /");
+    }
+
+    public function formAddPergunta() {
+        $this->pageTitle = 'Adicionar Pergunta';
+
+        $MateriaModel = new Materias();
+        $this->materias = $MateriaModel->returnMaterias();
+        $this->submaterias = $MateriaModel->returnSubMaterias();
+
+        $this->render('formAddPergunta', 'MainLayout');
     }
 }
