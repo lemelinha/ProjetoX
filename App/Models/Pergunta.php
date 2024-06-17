@@ -54,4 +54,22 @@ class Pergunta extends Model {
                     (NULL, )
         ";
     }
+
+    public function searchPerguntas() {
+        $sql = "SELECT
+                    p.nm_titulo,
+                    p.ds_enunciado,
+                    m.nm_materia,
+                    sm.nm_submateria,
+                    p.ds_gabarito_dissertativo,
+                    a.ds_enunciado
+                FROM
+                    tb_perguntas
+        ";
+
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+    }
 }

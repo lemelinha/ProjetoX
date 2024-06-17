@@ -2,7 +2,7 @@
     <h1>Banco de perguntas</h1>
     <a class='btn' id='add-pergunta' href="/pergunta/form"><i class="fa-solid fa-plus"></i>Adicionar Pergunta</a>
     <section>
-        <form id="filter" style="flex-direction: row">
+        <form id="filter" style="flex-direction: row; border-bottom: 1px solid #ddd; padding-bottom: 20px">
         <label>Matéria: </label>
             <select name="materia">
                 <option value="" selected>Todas</option>
@@ -23,7 +23,7 @@
             </select>
             <label></label>
         </form>
-        <section>
+        <section style="margin-top: 20px">
             
         </section>
     </section>

@@ -19,4 +19,10 @@ class PerguntaController extends Controller {
         $PerguntaModel->addPergunta();
         echo json_encode(['insert' => true, 'message' => 'Pergunta publicada com sucesso!']);
     }
+
+    public function searchPergunta() {
+        $PerguntaModel = new Pergunta();
+        $this->perguntas = $PerguntaModel->searchPerguntas();
+        $this->renderView('perguntas');
+    }
 }
