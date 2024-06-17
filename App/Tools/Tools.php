@@ -33,6 +33,10 @@ abstract class Tools {
             return true;
         }
 
+        if ($_ENV['ADMIN_USER'] == $username) {
+            return true;
+        }
+
         return false;
     }
 }

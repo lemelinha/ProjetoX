@@ -51,6 +51,42 @@ abstract class Router {
             'controller' => 'LoginController',
             'action' => 'logout'
         ];
+
+        $routes['admin'] = [
+            'router' => '/admin',
+            'controller' => 'AdminController',
+            'action' => 'redirect'
+        ];
+
+        $routes['adminUsers'] = [
+            'router' => '/admin/users',
+            'controller' => 'AdminController',
+            'action' => 'users'
+        ];
+
+        $routes['adminMateria'] = [
+            'router' => '/admin/materias',
+            'controller' => 'AdminController',
+            'action' => 'Materias'
+        ];
+
+        $routes['adminMateriaAdd'] = [
+            'router' => '/admin/materias/add',
+            'controller' => 'AdminController',
+            'action' => 'addMateria'
+        ];
+
+        $routes['adminSubMateria'] = [
+            'router' => '/admin/submaterias',
+            'controller' => 'AdminController',
+            'action' => 'SubMaterias'
+        ];
+
+        $routes['adminSubMateriaAdd'] = [
+            'router' => '/admin/submaterias/add',
+            'controller' => 'AdminController',
+            'action' => 'addSubMateria'
+        ];
         
         $this->routes = $routes;
     }

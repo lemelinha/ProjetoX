@@ -22,7 +22,7 @@ class Bootstrap extends Router{
                 $controllerInstance = new $controllerClass();
                 $controllerInstance->$action();
                 die();
-            } 
+            }
         }
 
         require 'Views/erro.php';

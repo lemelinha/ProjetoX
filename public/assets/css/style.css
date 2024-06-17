@@ -27,25 +27,40 @@ a {
   color: #fff;
 }
 
-body#layout header {
+body#mainLayout {
+  font-family: "Montserrat";
+}
+body#mainLayout header {
   background-color: #333;
   padding: 10px;
-  height: 90px;
+  height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-family: "Montserrat";
+  column-gap: 40px;
+  flex-wrap: wrap;
   color: #fff;
 }
-body#layout header h1 {
+body#mainLayout header h1 {
   font-family: "MicroSquareBold";
   font-size: 42px;
 }
-body#layout header a {
+body#mainLayout header a {
   font-family: "MicroSquareRegular";
 }
-body#layout header .btn {
+body#mainLayout main {
+  margin: 30px auto;
+  max-width: 1200px;
+}
+body#mainLayout main h1 {
+  text-align: center;
+}
+body#mainLayout main .btn#add-pergunta {
+  color: #161616;
+  margin-left: 100%;
+}
+body#mainLayout .btn {
   font-size: 18px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -63,7 +78,7 @@ body#layout header .btn {
   z-index: 1;
   margin: 5px;
 }
-body#layout header .btn:before {
+body#mainLayout .btn:before {
   transition: 0.5s all ease;
   position: absolute;
   top: 0;
@@ -75,16 +90,16 @@ body#layout header .btn:before {
   background-color: #5424da;
   z-index: -1;
 }
-body#layout header .btn:hover, body#layout header .btn:focus {
+body#mainLayout .btn:hover, body#mainLayout .btn:focus {
   color: #fff;
 }
-body#layout header .btn:hover:before, body#layout header .btn:focus:before {
+body#mainLayout .btn:hover:before, body#mainLayout .btn:focus:before {
   transition: 0.5s all ease;
   left: 0;
   right: 0;
   opacity: 1;
 }
-body#layout header .btn:active {
+body#mainLayout .btn:active {
   transform: scale(0.9);
 }
 
@@ -172,6 +187,113 @@ body#register form a#register::before {
 body#login form a#register:hover::before,
 body#register form a#register:hover::before {
   transform: translate(0, -100%);
+}
+
+body#adminLayout {
+  font-family: "Montserrat";
+}
+body#adminLayout header {
+  text-align: center;
+  padding: 10px;
+  background-color: #333;
+  color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body#adminLayout header h1 {
+  font-family: "MicroSquareRegular";
+  font-size: 40px;
+}
+body#adminLayout header h2 {
+  font-size: 36px;
+}
+body#adminLayout header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+body#adminLayout header nav .nav-btn {
+  font-size: 20px;
+  position: relative;
+  overflow: hidden;
+}
+body#adminLayout header nav .nav-btn::before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  background-color: #5424da;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translate(-110%, -100%);
+  transition: 200ms ease-in-out;
+}
+body#adminLayout header nav .nav-btn:hover::before {
+  transform: translate(0, -100%);
+}
+body#adminLayout main {
+  margin: 40px auto;
+  max-width: 1200px;
+}
+body#adminLayout main form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+}
+body#adminLayout main form input {
+  padding: 10px 15px;
+  border-radius: 4px;
+  background-color: #d4d4d4;
+  width: 200px;
+  transition: 200ms;
+}
+body#adminLayout main form input:hover, body#adminLayout main form input:focus {
+  background-color: #acacac;
+}
+body#adminLayout main form input[type=submit] {
+  cursor: pointer;
+  color: #5424da;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px 13px;
+  border: 1px solid #5424da;
+  border-radius: 8px;
+  transition: all ease-in-out 0.3s;
+}
+body#adminLayout main form input[type=submit]:hover {
+  background-color: #5424da;
+  color: #161616;
+}
+body#adminLayout main section .materia {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+}
+body#adminLayout main section .materia .btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+body#adminLayout main section .materia .btn.btn-excluir {
+  background-color: #fd1210;
+}
+body#adminLayout main section .materia .btn.btn-alterar {
+  background-color: #12dd10;
+}
+body#adminLayout main section .materia:nth-child(even) {
+  background-color: #ddd;
 }
 
 /*# sourceMappingURL=style.css.map */
