@@ -52,6 +52,7 @@ body#mainLayout header a {
 body#mainLayout main {
   margin: 30px auto;
   max-width: 1200px;
+  padding: 20px;
 }
 body#mainLayout main h1 {
   text-align: center;
@@ -102,6 +103,39 @@ body#mainLayout main form input[type=submit] {
 body#mainLayout main form input[type=submit]:hover {
   background-color: #5424da;
   color: #161616;
+}
+body#mainLayout main section#perguntas {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+body#mainLayout main section#perguntas .pergunta {
+  border-radius: 8px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+body#mainLayout main section#perguntas .pergunta > span {
+  margin-bottom: -20px;
+}
+body#mainLayout main section#perguntas .pergunta:nth-child(even) {
+  background-color: #ddd;
+}
+body#mainLayout main section#perguntas .pergunta .alternativas {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  row-gap: 20px;
+  flex-wrap: wrap;
+}
+body#mainLayout main section#perguntas .pergunta .alternativas div.alternativa {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
 }
 body#mainLayout .btn {
   font-size: 18px;

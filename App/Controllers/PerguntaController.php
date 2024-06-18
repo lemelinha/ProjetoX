@@ -22,13 +22,13 @@ class PerguntaController extends Controller {
     }
 
     public function searchPergunta() {
-        $filterMateria = $_GET['materia']??'';
-        $filterSubMateria = $_GET['submateria']??'';
-        $filterTipoResposta = $_GET['tipo-resposta']??'';
+        $this->filterMateria = $_GET['materia']??'';
+        $this->filterSubMateria = $_GET['submateria']??'';
+        $this->filterTipoResposta = $_GET['tipoResposta']??'';
 
         $PerguntaModel = new Pergunta();
-        [$this->perguntas, $this->alternativas] = $PerguntaModel->searchPerguntas($filterMateria, $filterSubMateria, $filterTipoResposta);
-        
+        [$this->perguntas, $this->alternativas] = $PerguntaModel->searchPerguntas($this->filterMateria, $this->filterSubMateria, $this->filterTipoResposta);
+
         $this->renderView('perguntas');
     }
 }

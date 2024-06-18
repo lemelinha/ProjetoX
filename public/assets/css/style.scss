@@ -66,6 +66,7 @@ body#mainLayout {
     main {
         margin: 30px auto;
         max-width: 1200px;
+        padding: 20px;
 
         h1 {
             text-align: center;
@@ -126,6 +127,48 @@ body#mainLayout {
                 &:hover {
                     background-color: $main-color;
                     color: #161616;
+                }
+            }
+        }
+
+        section#perguntas {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+
+            .pergunta {
+                border-radius: 8px;
+                padding: 30px;
+                
+                display: flex;
+                flex-direction: column;
+                row-gap: 30px;
+
+                &>span {
+                    margin-bottom: -20px;
+                }
+
+                &:nth-child(even) {
+                    background-color: #ddd;
+                }
+
+                .alternativas {
+                    margin-bottom: 30px;
+
+                    display: flex;
+                    flex-direction: row;
+                    row-gap: 20px;
+                    flex-wrap: wrap;
+
+                    div.alternativa {
+                        flex: 1;
+                        min-width: 200px;
+
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        column-gap: 10px;
+                    }
                 }
             }
         }

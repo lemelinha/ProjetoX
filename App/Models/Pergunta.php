@@ -94,6 +94,8 @@ class Pergunta extends Model {
                     p.nm_titulo,
                     p.ds_enunciado as pergunta_enunciado,
                     m.nm_materia,
+                    m.cd_materia,
+                    sm.cd_submateria,
                     sm.nm_submateria,
                     p.ds_dissertativo_gabarito,
                     p.id_alternativa_gabarito
@@ -109,20 +111,40 @@ class Pergunta extends Model {
                         p.id_submateria = sm.cd_submateria
         ";
 
+        if ($materia != '' || $submateria != '') {
+            $sql .= "WHERE ";
+            if ($materia != '') {
+                $sql .= "m.cd_materia = :materia ";
+            }
+            if ($submateria != '') {
+                if ($materia != '') {
+                    $sql .= " AND ";
+                }
+                $sql .= " sm.cd_submateria = :submateria ";
+            }
+        }
+
         $query_pergunta = $this->db->prepare($sql);
+        if ($materia != '') {
+            $query_pergunta->bindParam(':materia', $materia);
+        }
+        if ($submateria != '') {
+            $query_pergunta->bindParam(':submateria', $submateria);
+        }
         $query_pergunta->execute();
         $perguntas = $query_pergunta->fetchAll();
         
         $alternativas = null;
-        if ($tipoResposta == 'alternativa') {
+        if ($tipoResposta == 'alternativa' || $tipoResposta == '') {
             $sql = "SELECT
+                        cd_alternativa,
                         nm_letra,
-                        ds_enunciado as alternativa_enunciado,
+                        a.ds_enunciado AS alternativa_enunciado,
                         id_pergunta
                     FROM
-                        tb_alternativa
+                        tb_alternativa AS a
                     INNER JOIN
-                        tb_pergunta
+                        tb_pergunta AS p
                         ON
                             cd_pergunta = id_pergunta
             ";
