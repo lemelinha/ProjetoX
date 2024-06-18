@@ -18,11 +18,17 @@ class PerguntaController extends Controller {
         $PerguntaModel = new Pergunta();
         $PerguntaModel->addPergunta();
         echo json_encode(['insert' => true, 'message' => 'Pergunta publicada com sucesso!']);
+        die();
     }
 
     public function searchPergunta() {
+        $filterMateria = $_GET['materia']??'';
+        $filterSubMateria = $_GET['submateria']??'';
+        $filterTipoResposta = $_GET['tipo-resposta']??'';
+
         $PerguntaModel = new Pergunta();
-        $this->perguntas = $PerguntaModel->searchPerguntas();
+        [$this->perguntas, $this->alternativas] = $PerguntaModel->searchPerguntas($filterMateria, $filterSubMateria, $filterTipoResposta);
+        
         $this->renderView('perguntas');
     }
 }

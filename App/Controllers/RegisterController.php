@@ -20,10 +20,12 @@ class RegisterController extends Controller {
             echo json_encode(['error' => 'Usuário ou email já cadastrados']);
             die();
         }
-
+        
         $RegisterModel = new Register();
-
+        
         $RegisterModel->register($user, $email, $password);
+        
         echo json_encode(['register' => true]);
+        die();
     }
 }

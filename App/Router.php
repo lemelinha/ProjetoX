@@ -100,6 +100,12 @@ abstract class Router {
             'action' => 'addPergunta'
         ];
 
+        $routes['getPergunta'] = [
+            'router' => '/get/perguntas',
+            'controller' => 'PerguntaController',
+            'action' => 'searchPergunta'
+        ];
+
         $routes['getSubMaterias'] = [
             'router' => '/get/submaterias/materia/[0-9]+',
             'controller' => 'PerguntaController',

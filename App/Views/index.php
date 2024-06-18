@@ -10,7 +10,7 @@
                 <option value="2">materia 2</option>
             </select>
             <label>SubMatéria: </label>
-            <select name="materia">
+            <select name="submateria">
                 <option value="" selected>Todas</option>
                 <optgroup label='materia 1'>
                     <option value="1">submateria 1</option>
@@ -23,12 +23,23 @@
             </select>
             <label></label>
         </form>
-        <section style="margin-top: 20px">
+        <section style="margin-top: 20px" id="perguntas">
             
         </section>
     </section>
 
     <script>
         $('a#add-pergunta + section').css('margin-top', parseInt($('a#add-pergunta').css('height').replace('px', ''))+20)
+        $(document).ready(function () {
+            $.ajax({
+                url: '/get/perguntas',
+                type: 'get',
+                dataType: 'html',
+                data: $('form').serialize(),
+            })
+            .done(function (data) {
+                $('section#perguntas').html(data)
+            })
+        })
     </script>
 </main>

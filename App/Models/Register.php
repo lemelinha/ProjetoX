@@ -14,15 +14,16 @@ class Register extends Model {
         $query = $this->db->prepare($sql);
         $query->bindParam(':email', $email);
         $query->bindParam(':usuario', $user);
-        $query->bindParam(':senha', password_hash($password, PASSWORD_BCRYPT));
+        $query->bindValue(':senha', password_hash($password, PASSWORD_BCRYPT));
         $query->execute();
-
+        
+        
         $_SESSION['logged'] = [
             'id' => $this->db->lastInsertId(),
             'user' => $user,
             'email' => $email
         ];
-
+        
         return;
     }
 }

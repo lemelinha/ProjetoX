@@ -16,7 +16,7 @@
 </head>
 <body id='login'>
     <form>
-        <h1>Study IQ</h1>
+        <h1 onclick="window.location.href='/'" style="cursor: pointer">Study IQ</h1>
         <p>Inicie sua sessão</p>
         <input type="text" name="identifier" placeholder="Usuário ou Email" required>
         <input type="password" name="password" placeholder="Senha" required>

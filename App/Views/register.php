@@ -16,7 +16,7 @@
 </head>
 <body id='login'>
     <form>
-        <h1>Study IQ</h1>
+        <h1 onclick="window.location.href='/'" style="cursor: pointer">Study IQ</h1>
         <p>Registre-se</p>
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="user" placeholder="Usuário" required maxlength="50">
@@ -59,7 +59,7 @@
                     window.location.href = '/'
                 }
             })
-            .fail(function() {
+            .fail(function(a, b, c) {
                 retorno.text('OPS! Erro interno do servidor')
             })
         })

@@ -24,7 +24,20 @@ class Pergunta extends Model {
 
             $idPergunta = $this->db->lastInsertId();
             if ($_GET['tipo-resposta'] == 'alternativa') {
-                $this->insertAlternativas($idPergunta);
+                $idGabaritoAlternativa = $this->insertAlternativas($idPergunta);
+                
+                $sql = "UPDATE
+                            tb_pergunta
+                        SET
+                            id_alternativa_gabarito = :idAlternativa
+                        WHERE
+                            cd_pergunta = :idPergunta
+                ";
+
+                $query = $this->db->prepare($sql);
+                $query->bindParam(':idAlternativa', $idGabaritoAlternativa);
+                $query->bindParam(':idPergunta', $idPergunta);
+                $query->execute();
             } else if ($_GET['tipo-resposta'] == 'dissertativa') {
                 $sql = "UPDATE
                             tb_pergunta
@@ -48,28 +61,77 @@ class Pergunta extends Model {
     }
 
     private function insertAlternativas($idPergunta) {
-        $sql = "INSERT INTO
-                    tb_alternativa
-                VALUES
-                    (NULL, )
-        ";
+        $alternativas = [
+            'a' => $_GET['a'],
+            'b' => $_GET['b'],
+            'c' => $_GET['c'],
+            'd' => $_GET['d'],
+            'e' => $_GET['e']
+        ];
+        foreach ($alternativas as $letra => $enunciado) {
+            $sql = "INSERT INTO
+                        tb_alternativa
+                    VALUES
+                        (NULL, :letra, :enunciado, :idPergunta)
+            ";
+
+            $query = $this->db->prepare($sql);
+            $query->bindParam(':letra', $letra);
+            $query->bindParam(':enunciado', $enunciado);
+            $query->bindParam(':idPergunta', $idPergunta);
+            $query->execute();
+
+            if ($letra == $_GET['gabarito-alternativa']) {
+                $idGabaritoAlternativa = $this->db->lastInsertId();
+            }
+        }
+        return $idGabaritoAlternativa;
     }
 
-    public function searchPerguntas() {
+    public function searchPerguntas($materia, $submateria, $tipoResposta) {
         $sql = "SELECT
+                    p.cd_pergunta,
                     p.nm_titulo,
-                    p.ds_enunciado,
+                    p.ds_enunciado as pergunta_enunciado,
                     m.nm_materia,
                     sm.nm_submateria,
-                    p.ds_gabarito_dissertativo,
-                    a.ds_enunciado
+                    p.ds_dissertativo_gabarito,
+                    p.id_alternativa_gabarito
                 FROM
-                    tb_perguntas
+                    tb_pergunta as p
+                INNER JOIN
+                    tb_materia as m
+                    ON
+                        p.id_materia = m.cd_materia
+                INNER JOIN
+                    tb_submateria as sm
+                    ON
+                        p.id_submateria = sm.cd_submateria
         ";
 
-        $query = $this->db->prepare($sql);
-        $query->execute();
+        $query_pergunta = $this->db->prepare($sql);
+        $query_pergunta->execute();
+        $perguntas = $query_pergunta->fetchAll();
+        
+        $alternativas = null;
+        if ($tipoResposta == 'alternativa') {
+            $sql = "SELECT
+                        nm_letra,
+                        ds_enunciado as alternativa_enunciado,
+                        id_pergunta
+                    FROM
+                        tb_alternativa
+                    INNER JOIN
+                        tb_pergunta
+                        ON
+                            cd_pergunta = id_pergunta
+            ";
 
-        return $query->fetchAll();
+            $query_alternativas = $this->db->prepare($sql);
+            $query_alternativas->execute();
+            $alternativas = $query_alternativas->fetchAll();
+        }
+
+        return [$perguntas, $alternativas];
     }
 }
