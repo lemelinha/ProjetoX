@@ -109,6 +109,7 @@ class Pergunta extends Model {
                     tb_submateria as sm
                     ON
                         p.id_submateria = sm.cd_submateria
+
         ";
 
         if ($materia != '' || $submateria != '') {
@@ -123,6 +124,8 @@ class Pergunta extends Model {
                 $sql .= " sm.cd_submateria = :submateria ";
             }
         }
+
+        $sql .= " ORDER BY p.dt_criacao DESC";
 
         $query_pergunta = $this->db->prepare($sql);
         if ($materia != '') {
