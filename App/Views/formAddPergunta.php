@@ -14,7 +14,9 @@
         <select name="materia" required>
             <option value="0" selected>Selecione uma matéria</option>
             <?php
-                foreach ($this->materias as $materia): ?>
+                foreach ($this->materias as $materia): 
+                    if ($materia->st_materia == 'D') continue;
+                ?>
                     <option value="<?= $materia->cd_materia ?>"><?= $materia->nm_materia ?></option>
             <?php endforeach;?>
         </select>

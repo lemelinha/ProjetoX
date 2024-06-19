@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use Needs\Controller\Controller;
 use App\Models\Materias;
+use App\Models\Pergunta;
 
 class AdminController extends Controller {
     public function __construct() {
@@ -52,5 +53,42 @@ class AdminController extends Controller {
         $MateriaModel = new Materias();
         $MateriaModel->addSubMateria($submateria, $materia);
         echo json_encode(['erro' => false]);
+    }
+
+    public function Crud($data) {
+        try {
+            switch ($data['type']) {
+                case 'pergunta':
+                    $PerguntaModel = new Pergunta();
+                    
+                    if ($data['crud'] == 'delete') {
+                        $PerguntaModel->deletePergunta($data['id']);
+                    }
+    
+                    break;
+                case 'materia':
+                    $MateriaModel = new Materias();
+
+                    if ($data['crud'] == 'delete') {
+                        $MateriaModel->deleteMateria($data['id']); 
+                    }
+    
+                    break;
+                case 'submateria':
+                    $MateriaModel = new Materias();
+
+                    if ($data['crud'] == 'delete') {
+                        $MateriaModel->deleteSubMateria($data['id']); 
+                    }
+
+                    break;
+                default:
+                    echo json_encode(['erro' => false]);
+                    break;
+            }
+            echo json_encode(['erro' => false]);
+        } catch (Exception $e) {
+            echo json_encode(['erro' => true]);
+        }
     }
 }

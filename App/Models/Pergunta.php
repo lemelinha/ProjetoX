@@ -98,18 +98,26 @@ class Pergunta extends Model {
                     sm.cd_submateria,
                     sm.nm_submateria,
                     p.ds_dissertativo_gabarito,
-                    p.id_alternativa_gabarito
+                    p.id_alternativa_gabarito,
+                    m.st_materia,
+                    sm.st_submateria,
+                    u.nm_usuario,
+                    u.nm_email,
+                    p.dt_criacao
                 FROM
-                    tb_pergunta as p
+                    tb_pergunta AS p
                 INNER JOIN
-                    tb_materia as m
+                    tb_materia AS m
                     ON
                         p.id_materia = m.cd_materia
                 INNER JOIN
-                    tb_submateria as sm
+                    tb_submateria AS sm
                     ON
                         p.id_submateria = sm.cd_submateria
-
+                INNER JOIN
+                    tb_usuario AS u
+                    ON
+                        u.cd_usuario = p.id_usuario_criador
         ";
 
         if ($materia != '' || $submateria != '') {
@@ -158,5 +166,46 @@ class Pergunta extends Model {
         }
 
         return [$perguntas, $alternativas];
+    }
+
+    public function deletePergunta($id) {
+        try {
+            $this->db->beginTransaction();
+            
+            $pergunta = $this->executeStatement("SELECT * FROM tb_pergunta WHERE cd_pergunta = ?", [$id])[0];
+            if ($pergunta->id_alternativa_gabarito != null) {
+                $sql = "UPDATE
+                            tb_pergunta
+                        SET
+                            id_alternativa_gabarito = NULL
+                        WHERE
+                            cd_pergunta = :id
+                ";
+                $query = $this->db->prepare($sql);
+                $query->bindParam(':id', $id);
+                $query->execute();
+
+                $sql = "DELETE FROM
+                            tb_alternativa
+                        WHERE
+                            id_pergunta = :id
+                ";
+                $query = $this->db->prepare($sql);
+                $query->bindParam(':id', $id);
+                $query->execute();
+            }
+            $sql = "DELETE FROM
+                        tb_pergunta
+                    WHERE
+                        cd_pergunta = :id
+            ";
+            $query = $this->db->prepare($sql);
+            $query->bindParam(':id', $id);
+            $query->execute();
+
+            $this->db->commit();
+        } catch (PDOException $e) {
+            $this->rollBack();
+        }
     }
 }

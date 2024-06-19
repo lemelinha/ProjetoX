@@ -7,13 +7,12 @@
     </form>
     <section>
         <?php
-            foreach($this->materias as $materia): ?>
+            foreach($this->materias as $materia): 
+                if ($materia->st_materia == 'D') continue;
+            ?>
                 <div class="materia">
                     <h4><?= $materia->nm_materia ?></h4>
-                    <div class="btns">
-                        <button class='btn btn-alterar'><i class="fa-solid fa-pen"></i></button>
-                        <button class='btn btn-excluir'><i class="fa-solid fa-trash"></i></button>
-                    </div>
+                    <button class='btn btn-excluir' id="<?= $materia->cd_materia ?>"><i class="fa-solid fa-trash"></i></button>
                 </div>
         <?php endforeach; ?>
     </section>
@@ -37,6 +36,21 @@
             })
             .fail(function () {
                 retorno.text('OPS! Erro interno do servidor')
+            })
+        })
+        $('button.btn-excluir').on('click', function () {
+            $.ajax({
+                url: `/admin/crud/delete/type/materia/id/${$(this).attr('id')}`,
+                type: 'get',
+                dataType: 'json',
+                data: null
+            })
+            .done(function (data) {
+                if (data.erro) {
+                    $('#retorno').text('Algo deu errado')
+                } else {
+                    $('#retorno').text('Matéria deletada com sucesso')
+                }
             })
         })
     </script>

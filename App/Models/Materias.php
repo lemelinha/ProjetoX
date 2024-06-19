@@ -8,7 +8,7 @@ class Materias extends Model {
         $sql = "INSERT INTO
                     tb_materia
                 VALUES
-                    (NULL, :materia)
+                    (NULL, :materia, DEFAULT)
         ";
 
         $query = $this->db->prepare($sql);
@@ -22,7 +22,7 @@ class Materias extends Model {
         $sql = "INSERT INTO
                     tb_submateria
                 VALUES
-                    (NULL, :submateria, :materia)
+                    (NULL, :submateria, :materia, DEFAULT)
         ";
 
         $query = $this->db->prepare($sql);
@@ -50,7 +50,9 @@ class Materias extends Model {
         $sql = "SELECT
                     cd_submateria,
                     nm_submateria,
-                    nm_materia
+                    nm_materia,
+                    st_materia,
+                    st_submateria
                 FROM
                     tb_submateria
                 INNER JOIN
@@ -70,5 +72,42 @@ class Materias extends Model {
         $query->execute();
 
         return $query->fetchAll();
+    }
+
+    public function deleteMateria($id) {
+        $sql = "UPDATE
+                    tb_materia
+                SET
+                    st_materia = 'D'
+                WHERE
+                    cd_materia = :id
+        ";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':id', $id);
+        $query->execute();
+
+        $sql = "UPDATE
+                    tb_submateria
+                SET
+                    st_submateria = 'D'
+                WHERE
+                    id_materia = :id
+        ";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':id', $id);
+        $query->execute();
+    }
+
+    public function deleteSubMateria($id) {
+        $sql = "UPDATE
+                    tb_submateria
+                SET
+                    st_submateria = 'D'
+                WHERE
+                    cd_submateria = :id
+        ";
+        $query = $this->db->prepare($sql);
+        $query->bindParam(':id', $id);
+        $query->execute();
     }
 }

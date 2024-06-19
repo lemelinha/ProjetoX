@@ -88,6 +88,12 @@ abstract class Router {
             'action' => 'addSubMateria'
         ];
 
+        $routes['adminUpdateDelete'] = [
+            'router' => '/admin/crud/[a-z]+/type/[a-z]+/id/[0-9]+',
+            'controller' => 'AdminController',
+            'action' => 'Crud'
+        ];
+
         $routes['addPerguntaForm'] = [
             'router' => '/pergunta/form',
             'controller' => 'UserController',

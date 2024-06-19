@@ -6,13 +6,13 @@
         <div class="pergunta">
             <h2><?= $pergunta->nm_titulo ?></h2>
             <span>Tipo: <?= $pergunta->ds_dissertativo_gabarito!=null?'Dissertativa':'Alternativa' ?></span>
-            <span><strong><?= $pergunta->nm_materia ?></strong></span>
-            <span style="margin-bottom: 0"><?= $pergunta->nm_submateria ?></span>
+            <span>Matéria: <strong><?= $pergunta->st_materia!='D'?$pergunta->nm_materia:'unknown' ?></strong></span>
+            <span style="margin-bottom: 0">SubMatéria: <?= $pergunta->st_submateria!='D'?$pergunta->nm_submateria:'unknown' ?></span>
             <p><?= $pergunta->pergunta_enunciado ?></p>
             <?php
                 if ($pergunta->ds_dissertativo_gabarito != null) { ?>
                     <span>Resposta:</span>
-                    <p><?= $pergunta->ds_dissertativo_gabarito ?></p>
+                    <p> <?= $pergunta->ds_dissertativo_gabarito ?></p>
                 <?php } else if ($pergunta->id_alternativa_gabarito != null) { 
                             $idPergunta = $pergunta->cd_pergunta;
                             $alternativas = array_filter(
@@ -40,7 +40,31 @@
                                 </section>
                                 <p>Resposta: &nbsp;&nbsp;&nbsp;<?= $alternativaGabarito ?>)</p>
                             </section>
-                        <?php }
+                            <?php }
+            ?>
+            <p>Criado por: <?= $pergunta->nm_usuario ?> / <?= $pergunta->nm_email ?></p>
+            <p style="margin-top: -20px">Criado em: <?= date('d/m/Y', strtotime($pergunta->dt_criacao)) ?></p>
+            <?php
+                if ($_SESSION['logged']['type'] == 'admin') { ?>
+                    <button class="btn btn-excluir" style="color: #161616; cursor:pointer;" id="<?= $pergunta->cd_pergunta ?>">Excluir</button>
+                <?php }
             ?>
         </div>
-<?php endforeach;
+<?php endforeach; ?>
+<script>
+    $('button.btn-excluir').on('click', function () {
+        $.ajax({
+            url: `/admin/crud/delete/type/pergunta/id/${$(this).attr('id')}`,
+            type: 'get',
+            dataType: 'json',
+            data: null
+        })
+        .done(function (data) {
+            if (data.erro) {
+                alert('Algo deu errado')
+            } else {
+                alert('Pergunta Deletada com sucesso')
+            }
+        })
+    })
+</script>

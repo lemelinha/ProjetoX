@@ -4,7 +4,9 @@
         <input type="text" name="submateria" placeholder="Nome da submatéria">
         <select name="materiaPai" placeholder="Matéria Pai">
             <?php
-                foreach($this->materias as $materia): ?>
+                foreach($this->materias as $materia): 
+                    if ($materia->st_materia == 'D') continue;
+                ?>
                     <option value="<?= $materia->cd_materia ?>"><?= $materia->nm_materia ?></option>
             <?php endforeach;?>
         </select>
@@ -13,16 +15,15 @@
     </form>
     <section>
         <?php
-            foreach($this->submaterias as $materia): ?>
+            foreach($this->submaterias as $submateria): 
+                if ($submateria->st_submateria == 'D') continue;
+            ?>  
                 <div class="materia">
                     <div>
-                        <h4><?= $materia->nm_submateria ?></h4>
-                        <p><?= $materia->nm_materia ?></p>
+                        <h4><?= $submateria->nm_submateria ?></h4>
+                        <p><?= $submateria->nm_materia ?></p>
                     </div>
-                    <div class="btns">
-                        <button class='btn btn-alterar'><i class="fa-solid fa-pen"></i></button>
-                        <button class='btn btn-excluir'><i class="fa-solid fa-trash"></i></button>
-                    </div>
+                    <button class='btn btn-excluir' id="<?= $submateria->cd_submateria ?>"><i class="fa-solid fa-trash"></i></button>
                 </div>
         <?php endforeach; ?>
     </section>
@@ -46,6 +47,21 @@
             })
             .fail(function () {
                 retorno.text('OPS! Erro interno do servidor')
+            })
+        })
+        $('button.btn-excluir').on('click', function () {
+            $.ajax({
+                url: `/admin/crud/delete/type/submateria/id/${$(this).attr('id')}`,
+                type: 'get',
+                dataType: 'json',
+                data: null
+            })
+            .done(function (data) {
+                if (data.erro) {
+                    $('#retorno').text('Algo deu errado')
+                } else {
+                    $('#retorno').text('Matéria deletada com sucesso')
+                }
             })
         })
     </script>

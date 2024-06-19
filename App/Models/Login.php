@@ -37,6 +37,7 @@ class Login extends Model {
     public function authLoginAdmin($identifier, $password) {
         if ($_ENV['ADMIN_USER'] == $identifier && password_verify($password, $_ENV['ADMIN_PASSWORD_HASH'])) {
             $_SESSION['logged'] = [
+                'type' => 'admin',
                 'user' => $_ENV['ADMIN_USER']
             ];
             return true;
